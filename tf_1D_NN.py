@@ -1,6 +1,7 @@
 from pandas import read_csv
 from datetime import datetime
 from matplotlib import pyplot
+import numpy as np
 
 
 dataset = read_csv('eegdata.csv')
@@ -27,20 +28,24 @@ train_data_right.append(dataset[5849 : 5184+360])
 train_data_right.append(dataset[8983 : 6600+360])
 train_data_right.append(dataset[12161 : 12161+360])
 
-
+print(len(train_data_left))
 # plot dataset
-values = dataset.values
+
 # specify columns to plot
-groups = [0, 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
-i = 1
+groups = [0, 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+
 # plot each column
+i = 1
 pyplot.figure()
-for group in groups:
-	pyplot.subplot(len(groups), 1, i)
-	pyplot.plot(values[:, group])
-	pyplot.title(dataset.columns[group], y=0.5, loc='right')
-	i += 1
+for seq in range(len(train_data_left)):
+	values = train_data_left[seq].values
+	for group in groups:
+		pyplot.subplot(7, len(groups), i)
+		pyplot.plot(values[:, group])
+		pyplot.title(train_data_left[seq].columns[group], y=0.5, loc='right')
+		i += 1
 pyplot.show()
+
 
 
 # fashion_mnist = keras.datasets.fashion_mnist
