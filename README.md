@@ -1,3 +1,3 @@
-# eeg-pattern-detection
+# EEG Neural Network Pattern Detection
 
 This project is unfinished
